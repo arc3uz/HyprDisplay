@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+build/
+dist/
+*.tar.gz
+*.whl
+
+# Estado local dependiente del hardware: nunca versionar
+profiles.json
+state.json
+monitor-profiles.lua
+*.bak-hyprdisplay-*

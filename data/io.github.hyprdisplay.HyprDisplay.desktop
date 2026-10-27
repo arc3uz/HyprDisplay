@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=HyprDisplay
+GenericName=Disposición de monitores
+Comment=Organiza los monitores de Hyprland con perfiles y modos rápidos
+Exec=hyprdisplay gui
+Icon=io.github.hyprdisplay.HyprDisplay
+Terminal=false
+Categories=Settings;HardwareSettings;GTK;
+Keywords=monitor;display;pantalla;hyprland;layout;perfil;
+StartupNotify=true
