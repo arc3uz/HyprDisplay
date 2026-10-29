@@ -33,8 +33,7 @@ Designed for Hyprland configurations based on the **Lua parser**
 
 - **Hyprland 0.55 or newer** with a **Lua** configuration (`hyprland.lua` and
   `config/`). `hyprdisplay doctor` checks the version and warns if the Lua
-  config manager is not supported. See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)
-  (currently Spanish-only).
+  config manager is not supported. See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
 - Python 3.10 or newer.
 - PyGObject with GTK 4, libadwaita 1 and pycairo installed as system packages.
 - `hyprctl` available on `PATH`.

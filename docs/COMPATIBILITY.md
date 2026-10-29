@@ -1,42 +1,45 @@
-# Compatibilidad
+# Compatibility
 
-HyprDisplay no es una aplicación universal de monitores: es una herramienta para
-**Hyprland con el config manager Lua**. Esta página documenta qué funciona, qué
-no y cómo comprobarlo antes de instalar.
+**English** · [Español](COMPATIBILITY.es.md)
 
-## Resumen
+HyprDisplay is not a universal monitor application: it is a tool for
+**Hyprland with the Lua config manager**. This page documents what works,
+what does not, and how to check before installing.
 
-| Entorno | Soporte |
+## Summary
+
+| Environment | Support |
 |---|---|
-| Hyprland 0.55+ con configuración Lua (`hyprland.lua` + `config/`) | **Soportado** |
-| Hyprland 0.55+ con configuración Lua en otro layout | Parcial: requiere ajustar rutas a mano |
-| Hyprland 0.54 o anterior | **No soportado** |
-| Hyprland con `hyprland.conf` clásico | **No soportado** |
-| Sway, i3, GNOME, KDE Plasma, X11 | **No soportado** |
+| Hyprland 0.55+ with a Lua configuration (`hyprland.lua` + `config/`) | **Supported** |
+| Hyprland 0.55+ with a Lua configuration in a different layout | Partial: requires adjusting the paths manually |
+| Hyprland 0.54 or older | **Not supported** |
+| Hyprland with a classic `hyprland.conf` | **Not supported** |
+| Sway, i3, GNOME, KDE Plasma, X11 | **Not supported** |
 
-La distro no importa: funciona igual en Arch/CachyOS, Fedora, Debian/Ubuntu,
-openSUSE, etc., siempre que se cumplan los requisitos de abajo. Lo que importa
-es el compositor y el formato de configuración.
+The distro does not matter: it works the same on Arch/CachyOS, Fedora,
+Debian/Ubuntu, openSUSE, etc., as long as the requirements below are met.
+What matters is the compositor and the configuration format.
 
-## Requisitos duros
+## Hard requirements
 
-| Requisito | Por qué | Qué falla si no está |
+| Requirement | Why it is needed | What fails when missing |
 |---|---|---|
-| Hyprland 0.55+ | `hl.monitor`, `hl.get_monitors` y `hyprctl eval` con Lua | `doctor` marca **FAIL** en *Versión mínima* |
-| Config manager Lua activo | La app aplica reglas con `hyprctl eval` | *Configuración Lua*: no detectada |
-| `~/.config/hypr/hyprland.lua` | Ahí se inserta el `require` | `doctor --fix` lanza un error de configuración |
-| `~/.config/hypr/config/binds.lua` | Ahí se instala el atajo `SUPER + P` | `hyprdisplay shortcut` no encuentra el archivo |
-| `hyprctl` en `PATH`, mismo usuario y sesión | Toda la comunicación con Hyprland | Error «hyprctl no está instalado» |
-| GTK 4 + libadwaita 1 + PyGObject + pycairo | Interfaz gráfica | La GUI no abre; la CLI sigue funcionando |
-| Sesión Wayland | Socket de Hyprland y `wl_output` | No se pueden aplicar reglas |
+| Hyprland 0.55+ | `hl.monitor`, `hl.get_monitors` and `hyprctl eval` with Lua | *doctor* reports **FAIL** on *Versión mínima* |
+| Lua config manager active | The app applies rules with `hyprctl eval` | *Configuración Lua*: not detected |
+| `~/.config/hypr/hyprland.lua` | The `require` is inserted there | `doctor --fix` raises a config error |
+| `~/.config/hypr/config/binds.lua` | The `SUPER + P` shortcut is installed there | `hyprdisplay shortcut` cannot find the file |
+| `hyprctl` on `PATH`, same user and session | Every interaction with Hyprland | Error «hyprctl no está instalado» |
+| GTK 4 + libadwaita 1 + PyGObject + pycairo | Graphical interface | The GUI will not open; the CLI keeps working |
+| Wayland session | The Hyprland socket and `wl_output` | Rules cannot be applied |
 
-## Comprobación rápida
+## Quick check
 
 ```bash
 hyprdisplay doctor
 ```
 
-Salida esperada en un equipo compatible:
+Expected output on a compatible machine (labels are printed by the tool in
+Spanish):
 
 ```text
 [OK  ] Hyprland: v0.56.2
@@ -50,52 +53,54 @@ Salida esperada en un equipo compatible:
 [OK  ] Monitores: eDP-1
 ```
 
-Si *Versión mínima* o *Configuración Lua* fallan, la app puede abrir la interfaz
-pero no podrá aplicar ni persistir la disposición.
+If *Versión mínima* or *Configuración Lua* fail, the app can still open its
+interface but will not be able to apply or persist the layout.
 
-## Portabilidad entre equipos
+## Portability between machines
 
-Lo que **sí** es independiente del hardware y del usuario:
+What **is** independent of the hardware and the user:
 
-- Rutas basadas en `XDG_CONFIG_HOME`, `XDG_DATA_HOME` y `Path.home()`.
-- `install.sh` usa `PREFIX` (por defecto `~/.local`) y genera el lanzador con la
-  ruta real de instalación.
-- Los perfiles identifican monitores por EDID y puerto, no por índice.
+- Paths based on `XDG_CONFIG_HOME`, `XDG_DATA_HOME` and `Path.home()`.
+- `install.sh` uses `PREFIX` (default `~/.local`) and generates the launcher
+  with the real installation path.
+- Profiles identify monitors by EDID and port, not by index.
 
-Lo que **no** se debe copiar entre equipos:
+What must **not** be copied between machines:
 
-- `~/.config/hyprdisplay/profiles.json` y `state.json`: contienen el EDID y los
-  modos del panel anterior.
-- `~/.config/hypr/config/monitor-profiles.lua`: reglas generadas para ese
+- `~/.config/hyprdisplay/profiles.json` and `state.json`: they contain the
+  EDID and the modes of the previous panel.
+- `~/.config/hypr/config/monitor-profiles.lua`: rules generated for that
   hardware.
 
-Tras migrar, borra esos tres archivos y regenera con `hyprdisplay doctor --fix`
-antes de crear perfiles nuevos.
+After migrating, delete those three files and regenerate with
+`hyprdisplay doctor --fix` before creating new profiles.
 
-## Dependencias por distro
+## Dependencies by distro
 
-| Distro | Paquetes |
+| Distro | Packages |
 |---|---|
 | Arch / CachyOS | `python-gobject gtk4 libadwaita python-cairo` |
 | Fedora | `python3-gobject gtk4 libadwaita python3-cairo` |
 | Debian / Ubuntu | `python3-gi gir1.2-gtk-4.0 libadwaita-1-0 python3-cairo` |
 | openSUSE | `python3-gobject gtk4 libadwaita1 python3-cairo` |
 
-No se instalan dependencias con `pip` (PEP 668): se usan los paquetes del sistema
-para que coincidan con las versiones de GTK que ya usa el escritorio.
+Dependencies are not installed with `pip` (PEP 668): system packages are used
+so they match the GTK versions your desktop already runs.
 
-## Limitaciones conocidas
+## Known limitations
 
-- No genera configuración para `hyprland.conf` clásico.
-- Asume que los binds están en `config/binds.lua` y usa `hl.bind`.
-- El atajo por defecto (`SUPER + P`) se puede cambiar con `hyprdisplay shortcut`,
-  pero el script de instalación solo añade ese.
-- Flatpak no es viable: la app necesita acceso directo al socket de Hyprland.
-- Si Hyprland cambia la API Lua en el futuro, habrá que actualizar la app.
+- Does not generate configuration for a classic `hyprland.conf`.
+- Assumes the keybinds live in `config/binds.lua` and use `hl.bind`.
+- The default shortcut (`SUPER + P`) can be replaced with
+  `hyprdisplay shortcut`, but the install script only adds that one.
+- Flatpak is not viable: the app needs direct access to the Hyprland socket.
+- If Hyprland changes the Lua API in the future, the app will need updating.
 
-## Mejoras futuras
+## Future improvements
 
-1. Backend para `hyprland.conf` (líneas `monitor=` en lugar de `hl.monitor`).
-2. Detección automática del layout de binds (`binds.lua`, `keybinds.lua`, `.conf`).
-3. Instalación de dependencias por distro desde `install.sh`.
-4. Empaquetado AUR para Arch/CachyOS.
+1. Backend for the classic `hyprland.conf` (`monitor=` lines instead of
+   `hl.monitor`).
+2. Automatic detection of the keybinds layout (`binds.lua`, `keybinds.lua`,
+   `.conf`).
+3. Installing per-distro dependencies from `install.sh`.
+4. AUR packaging for Arch/CachyOS.
