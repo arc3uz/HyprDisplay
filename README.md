@@ -10,6 +10,10 @@ Designed for Hyprland configurations based on the **Lua parser**
 
 <img src="data/io.github.hyprdisplay.HyprDisplay.svg" width="96" align="right">
 
+<p align="center">
+  <img src="docs/img/screenshot.png" alt="HyprDisplay main window: monitor canvas and per-monitor settings panel" width="820">
+</p>
+
 ## Features
 
 - **Visual editor**: drag the monitors on the canvas to place them; magnetic
@@ -234,6 +238,8 @@ data/
   io.github.hyprdisplay.HyprDisplay.svg
 docs/
   COMPATIBILITY.md
+  COMPATIBILITY.es.md
+  img/screenshot.png
 tests/
   test_core.py
   test_config.py

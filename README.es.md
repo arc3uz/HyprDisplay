@@ -10,6 +10,10 @@ Pensado para configuraciones de Hyprland basadas en el **parser Lua**
 
 <img src="data/io.github.hyprdisplay.HyprDisplay.svg" width="96" align="right">
 
+<p align="center">
+  <img src="docs/img/screenshot.png" alt="Ventana principal de HyprDisplay: lienzo de monitores y panel de ajustes" width="820">
+</p>
+
 ## Características
 
 - **Editor visual**: arrastra los monitores en el lienzo para colocarlos; el
@@ -229,6 +233,8 @@ data/
   io.github.hyprdisplay.HyprDisplay.svg
 docs/
   COMPATIBILITY.md
+  COMPATIBILITY.es.md
+  img/screenshot.png
 tests/
   test_core.py
   test_config.py
