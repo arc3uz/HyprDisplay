@@ -1,3 +1,5 @@
 """HyprDisplay: disposición de monitores para Hyprland."""
 
-__version__ = "0.1.0"
+from .config import VERSION as __version__
+
+__all__ = ["__version__"]

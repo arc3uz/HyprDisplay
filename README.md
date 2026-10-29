@@ -3,10 +3,10 @@
 Editor de disposición de monitores para **Hyprland** con interfaz GTK4/libadwaita,
 perfiles persistentes y modos rápidos al estilo de `Win + P`.
 
-Pensado para configuraciones de Hyprland que usan el **parser Lua** (Hyprland 0.55+),
-como la de CachyOS de este equipo.
+Pensado para configuraciones de Hyprland basadas en el **parser Lua**
+(Hyprland 0.55+), típicas de CachyOS y de muchas dotfiles.
 
-![Icono de HyprDisplay](data/io.github.hyprdisplay.HyprDisplay.svg)
+<img src="data/io.github.hyprdisplay.HyprDisplay.svg" width="96" align="right">
 
 ## Características
 
@@ -215,7 +215,7 @@ hyprdisplay/
   app.py        # Aplicación Adw y aceleradores
   canvas.py     # Lienzo interactivo con Cairo
   cli.py        # Comandos de terminal
-  config.py     # Rutas XDG, escritura atómica, require
+  config.py     # Metadatos, rutas XDG, escritura atómica, require
   core.py       # Lógica compartida GUI/CLI
   hypr.py       # Envoltorio de hyprctl
   layout.py     # Geometría, validación, modos rápidos
@@ -225,11 +225,16 @@ hyprdisplay/
 data/
   io.github.hyprdisplay.HyprDisplay.desktop
   io.github.hyprdisplay.HyprDisplay.svg
+docs/
+  COMPATIBILITY.md
 tests/
+  test_core.py
   test_config.py
+  test_hypr.py
   test_layout.py
   test_lua.py
   test_profiles.py
+.github/workflows/tests.yml
 install.sh
 run.py          # Lanzador desde el árbol de fuentes
 ```
@@ -306,9 +311,8 @@ esa entrada (con copia de seguridad). Puedes elegir otra combinación con
 `--key`.
 
 **La ventana se abre en mosaico (tiled)**
-Hyprland coloca las ventanas nuevas en mosaico. Puedes flotarla con
-`SUPER + ALT + Space` (tu atajo de ventana flotante) o añadir una regla de
-ventana a tu configuración:
+Hyprland coloca las ventanas nuevas en mosaico. Puedes flotarla con tu atajo
+habitual de flotado o añadir una regla de ventana a tu configuración:
 
 ```lua
 hl.window_rule({

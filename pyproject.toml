@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hyprdisplay"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Disposición de monitores con perfiles y modos rápidos para Hyprland"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -25,3 +25,7 @@ hyprdisplay = "hyprdisplay.cli:main"
 
 [tool.setuptools]
 packages = ["hyprdisplay"]
+
+[tool.setuptools.dynamic]
+# Fuente única de la versión: hyprdisplay/config.py
+version = { attr = "hyprdisplay.config.VERSION" }

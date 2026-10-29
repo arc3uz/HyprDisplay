@@ -15,7 +15,6 @@ class HyprError(RuntimeError):
 
 
 _MODE_RE = re.compile(r"^(\d+)x(\d+)@([0-9.]+)Hz$")
-_POS_RE = re.compile(r"^(-?\d+)x(-?\d+)$")
 _VERSION_RE = re.compile(r"v?(\d+(?:\.\d+)*)")
 
 #: Primera versión de Hyprland con config manager Lua estable.
@@ -305,10 +304,3 @@ def notify(message: str, timeout_ms: int = 5000) -> None:
         _run(["notify", "1", str(timeout_ms), "rgb(89cff0)", message])
     except HyprError:
         pass
-
-
-def parse_position(value: str) -> tuple[int, int] | None:
-    match = _POS_RE.match(value.strip())
-    if not match:
-        return None
-    return int(match.group(1)), int(match.group(2))
