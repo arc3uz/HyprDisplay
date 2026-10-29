@@ -8,8 +8,6 @@ persistent profiles and `Win + P`-style quick modes.
 Designed for Hyprland configurations based on the **Lua parser**
 (Hyprland 0.55+), as used by CachyOS and many dotfiles.
 
-<img src="data/io.github.hyprdisplay.HyprDisplay.svg" width="96" align="right">
-
 <p align="center">
   <img src="docs/img/screenshot.png" alt="HyprDisplay main window: monitor canvas and per-monitor settings panel" width="820">
 </p>
